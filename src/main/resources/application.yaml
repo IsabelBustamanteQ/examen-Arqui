@@ -1,0 +1,12 @@
+server:
+  port: 8080
+api:
+  responseCodes:
+    ok.description : OK
+    badRequest.description: Bad Request, invalid format of the request. See response message for more information
+    internalServer.description: Internal Server Error. Seee response message for more information
+springdoc:
+  swagger-ui.path: /openapi/swagger-ui.html
+  api-docs.path: /openapi/v3/api-docs
+  packagesToScan: com.example.proyecto
+  pathsToMatch: /**
