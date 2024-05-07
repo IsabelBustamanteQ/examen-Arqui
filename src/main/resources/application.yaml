@@ -10,3 +10,8 @@ springdoc:
   api-docs.path: /openapi/v3/api-docs
   packagesToScan: com.example.proyecto
   pathsToMatch: /**
+sentry:
+  dsn: https://d398e19f139c6a1725701ef593662b25@o4507101776379904.ingest.us.sentry.io/4507217636884480
+  # Set traces-sample-rate to 1.0 to capture 100% of transactions for performance monitoring.
+  # We recommend adjusting this value in production.
+  traces-sample-rate: 1.0

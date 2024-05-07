@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.Set;
+import io.sentry.Sentry;
 
 @RestController
 public class HelloController implements IHelloApi{
@@ -25,7 +25,7 @@ public class HelloController implements IHelloApi{
         try {
             throw new Exception("This is a test.");
         } catch (Exception e) {
-//            Sentry.captureException(e);
+            Sentry.captureException(e);
         }
         return "Greetings from Spring boot";
     }
