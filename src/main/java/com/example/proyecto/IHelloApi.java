@@ -1,11 +1,13 @@
 package com.example.proyecto;
 
+import com.example.proyecto.dto.ProductDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.ErrorResponse;
 
 public interface IHelloApi {
@@ -27,4 +29,11 @@ public interface IHelloApi {
             }
     )
     public String index();
+
+    @Tag(name = "Products", description = "Obtain one product by id")
+    public ResponseEntity<ProductDto> obtain(String id);
+
+
+    @Tag(name = "Products", description = "Create product")
+    public ResponseEntity<ProductDto> create(ProductDto product);
 }
