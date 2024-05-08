@@ -44,7 +44,7 @@ public class HelloController implements IHelloApi{
         try {
             json = mapper.writeValueAsString(product);
             JsonSchemaFactory factory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V7);
-            JsonSchema jsonSchema = factory.getSchema(HelloController.class.getClassLoader().getResourceAsStream("schemas/product.json"));
+            JsonSchema jsonSchema = factory.getSchema(HelloController.class.getClassLoader().getResourceAsStream("/schemas/product.json"));
             JsonNode jsonNode = mapper.readTree(json);
             Set<ValidationMessage> errors = jsonSchema.validate(jsonNode);
 
