@@ -16,53 +16,53 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.Set;
 import io.sentry.Sentry;
-
-@RestController
-public class HelloController implements IHelloApi{
-    @GetMapping("/")
-    public String index() {
-
-        try {
-            throw new Exception("This is a test.");
-        } catch (Exception e) {
-            Sentry.captureException(e);
-        }
-        return "Greetings from Spring boot";
-    }
-    @GetMapping( value = "/products/{id}", produces = "application/json")
-    public ResponseEntity<ProductDto> obtain(@PathVariable String id) {
-
-        var product = new ProductDto(1,"a", 2);
-        return ResponseEntity.ok(product);
-    }
-
-    @PostMapping( value = "/products", produces = "application/json")
-    public ResponseEntity create(@RequestBody ProductDto product) {
-
-        ObjectMapper mapper = new ObjectMapper();
-        String json;
-        try {
-            json = mapper.writeValueAsString(product);
-            JsonSchemaFactory factory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V7);
-            JsonSchema jsonSchema = factory.getSchema(HelloController.class.getClassLoader().getResourceAsStream("/schemas/product.json"));
-            JsonNode jsonNode = mapper.readTree(json);
-            Set<ValidationMessage> errors = jsonSchema.validate(jsonNode);
-
-            String errorsCombined = "";
-            for( ValidationMessage error: errors) {
-                errorsCombined += error.toString() +  "\n";
-            }
-
-            if(errors.size() > 0) {
-                return ResponseEntity.badRequest().body("Please fix your JSON!,\n"+errorsCombined);
-            }
-            return ResponseEntity.ok(product);
-
-        } catch (JsonProcessingException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            return ResponseEntity.ok(product);
-        }
-    }
-
-}
+//
+//@RestController
+//public class HelloController implements IHelloApi{
+//    @GetMapping("/")
+//    public String index() {
+//
+//        try {
+//            throw new Exception("This is a test.");
+//        } catch (Exception e) {
+//            Sentry.captureException(e);
+//        }
+//        return "Greetings from Spring boot";
+//    }
+//    @GetMapping( value = "/products/{id}", produces = "application/json")
+//    public ResponseEntity<ProductDto> obtain(@PathVariable String id) {
+//
+//        var product = new ProductDto(1,"a", 2);
+//        return ResponseEntity.ok(product);
+//    }
+//
+//    @PostMapping( value = "/products", produces = "application/json")
+//    public ResponseEntity create(@RequestBody ProductDto product) {
+//
+//        ObjectMapper mapper = new ObjectMapper();
+//        String json;
+//        try {
+//            json = mapper.writeValueAsString(product);
+//            JsonSchemaFactory factory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V7);
+//            JsonSchema jsonSchema = factory.getSchema(HelloController.class.getClassLoader().getResourceAsStream("schemas/product.json"));
+//            JsonNode jsonNode = mapper.readTree(json);
+//            Set<ValidationMessage> errors = jsonSchema.validate(jsonNode);
+//
+//            String errorsCombined = "";
+//            for( ValidationMessage error: errors) {
+//                errorsCombined += error.toString() +  "\n";
+//            }
+//
+//            if(errors.size() > 0) {
+//                return ResponseEntity.badRequest().body("Please fix your JSON!,\n"+errorsCombined);
+//            }
+//            return ResponseEntity.ok(product);
+//
+//        } catch (JsonProcessingException e) {
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//            return ResponseEntity.ok(product);
+//        }
+//    }
+//
+//}
